@@ -37,6 +37,25 @@ class CategoriesServices {
     }
   }
 
+  async updateCategory(categoryId, categoryData) {
+    try{
+      const updateCategory = await CategoryModel.findByIdAndUpdate(categoryId, categoryData, {new: true});
+      return updateCategory;
+    }
+    catch(error){
+        throw new Error("Error in updating category: " + error.message);
+    }
+  }
+
+  async addTag(categoryId, tag) {
+    try {
+      const category = await CategoryModel.findByIdAndUpdate(categoryId, { $addToSet: { tag } }, { new: true });
+      return category;
+    } catch (error) {
+      throw new Error("Error in adding tag to category: " + error.message);
+    }
+  }
+
   
 }
 export default new CategoriesServices;

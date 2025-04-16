@@ -1,4 +1,5 @@
 import EmployerServices from "../../Services/EmployerServices.js";
+import ImageServices from "../../Services/ImageServices.js";
 
 class EmployerController {
     //Lấy tất cả nhà tuyển dụng
@@ -109,6 +110,24 @@ class EmployerController {
         return res.status(200).json({
             message: "Employer unbanned successfully", 
             updatedEmployer 
+        })
+    }
+    
+    async uploadEmployerLogo(req,res){
+        const {employerId}=req.body
+        const {imageFile} = req.file.buffer
+
+        const employerExist = await EmployerServices.getEmployerById(employerId)
+        if(!employerExist){return res.status(404).json({message:"No employer found"})}
+
+        const uploadImage = await ImageServices.CreateCloudinaryUpload(imageFile,employerId)
+        const image = uploadImage.result.url
+
+        const employer = await EmployerServices.uploadEmployerLogo(employerId,{companyLogo:image})
+
+        return res.status(200).json({
+            message:"Upload avatar successfully",
+            employer
         })
     }
 }

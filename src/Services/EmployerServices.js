@@ -42,13 +42,26 @@ class EmployerServices{
         }
     }
 
-    updateEmployer=async(userId, employerData)=>{
+    updateEmployer=async(employerId, employerData)=>{
         try {
             const updatedEmployer = await EmployerModel.findByIdAndUpdate(userId, employerData, { new: true });
             return updatedEmployer;
             
         } catch (error) {
             throw new Error("Error in updating employer: " + error.message);
+        }
+    }
+
+    uploadEmployerLogo=async(employerId,imageUrl)=>{
+        try {
+            const updatedEmployer = await EmployerModel.findByIdAndUpdate(employerId,{
+                companyLogo:imageUrl
+            })
+
+            return updatedEmployer
+            
+        } catch (error) {
+            throw new Error("Error upload image"+error.message)
         }
     }
 

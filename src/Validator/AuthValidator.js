@@ -13,5 +13,5 @@ class AuthValidator {
     })
 }
 
-export default AuthValidator;
+export default new AuthValidator;
 

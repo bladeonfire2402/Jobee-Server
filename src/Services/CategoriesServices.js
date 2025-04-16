@@ -10,6 +10,15 @@ class CategoriesServices {
     }
   }
 
+  async getCategoriesBySlug(slug) {
+    try {
+      const categories = await CategoryModel.findOne({ slug }).sort({ createdAt: -1 });
+      return categories;
+    } catch (error) {
+      throw new Error("Error in getting categories by slug: " + error.message);
+    }
+  }
+
   async getCategoryById(categoryId) {
     try {
       const category = await CategoryModel.findById(categoryId);

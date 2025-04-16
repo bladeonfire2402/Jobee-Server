@@ -19,7 +19,7 @@ class CategoryController{
         //create category
         const category=await CategoriesServices.createCategory(req.body);
        
-        return res.status(200).json({     
+        return res.status(200).json({
             message:"Create category successfully",
             category
         })

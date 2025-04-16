@@ -62,6 +62,20 @@ class EmployerServices{
         }
     }
 
+    verifyEmployer = async(employerId)=>{
+        try {
+            const verifyEmployer = await EmployerModel.findByIdAndUpdate(employerId,{
+                isVerified:true
+            },{new:true})
+
+            return verifyEmployer
+            
+        } catch (error) {
+            throw new Error("error verifyEmployer"+ error.message)
+        }
+
+    }
+
     banEmployer=async(userId)=>{
         try {
             const bannedEmployer = await EmployerModel.findByIdAndUpdate(userId, { isBlock: true }, { new: true });

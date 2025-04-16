@@ -3,7 +3,7 @@ import CategoryValidator from "../../Validator/CategoryValidator.js";
 
 class CategoryController{
     async getAllCategories(req,res){
-       const categories = await CategoriesServices.getAllCategories();
+       const categories = await CategoriesServices.getCategories();
        if(!categories){return res.status(400).json({error:"Categories not found"});}
        if(categories.length===0){return res.status(400).json({error:"Categories not found"});}
        

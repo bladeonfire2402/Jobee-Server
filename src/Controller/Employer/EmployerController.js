@@ -69,6 +69,17 @@ class EmployerController {
         });
     }
 
+    async verifyEmployer(req,res){
+        const {employerId}=req.body
+
+        const employer = await EmployerServices.getEmployerById(userId);
+        if (!employer) {return res.status(404).json({ error: "Employer not found" });}
+
+        const verifyEmployer = await EmployerServices.verifyEmployer(employerId)
+
+        return res.status(200).json({message:"verifyEmployer successfully",verifyEmployer})
+    }
+
     async banEmployer(req, res) {
         const { userId } = req.query;
 

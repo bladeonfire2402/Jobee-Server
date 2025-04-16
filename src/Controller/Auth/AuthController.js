@@ -27,20 +27,18 @@ class AuthController {
             pwd,
         }=req.body
 
-        const {error} = AuthValidator.signUpEmployerValidator.validate(req.body);
+        const {error} = await AuthValidator.signUpEmployerValidator.validate(req.body);
         if(error){return res.status(400).json({error:error.details[0].message})}//Nếu có lỗi dữ liệu đầu vào
 
-        const isExist= EmployerServices.getEmployerByEmail(companyEmail);
+        const isExist= await EmployerServices.getEmployerByEmail(companyEmail);
         if(isExist){return res.status(400).json({error:"Email already exists"})}//Nếu email đã tồn tại
 
-        const hashedPwd = encodePwd(pwd);
+        const hashedPwd =await encodePwd(pwd);
 
         const employer = await EmployerServices.createEmployer({
             ...req.body,
             pwd:hashedPwd,
         });
-
-        if(!employer){return res.status(400).json({error:"Error creating employer"})}//Nếu có lỗi khi tạo employer
 
         return res.status(200).json({message:"Employer created successfully", employer})//Nếu thành công
     }

@@ -6,7 +6,16 @@ import AuthValidator from "../../Validator/AuthValidator.js";
 
 
 class AuthController {
+    //hàm này sửa sau cho Employee
     signUp=async(req, res)=>{
+       
+    }
+
+    
+
+    signUpWithGoogle=async(req, res)=>{}
+
+    signUpAsEmployer=async(req, res)=>{
         const {
             companyName,
             companyDescription,
@@ -24,23 +33,16 @@ class AuthController {
         const isExist= EmployerServices.getEmployerByEmail(companyEmail);
         if(isExist){return res.status(400).json({error:"Email already exists"})}//Nếu email đã tồn tại
 
-        const hasedPwd = encodePwd(pwd);
-       
+        const hashedPwd = encodePwd(pwd);
 
         const employer = await EmployerServices.createEmployer({
             ...req.body,
-            pwd:hasedPwd,
+            pwd:hashedPwd,
         });
 
         if(!employer){return res.status(400).json({error:"Error creating employer"})}//Nếu có lỗi khi tạo employer
 
         return res.status(200).json({message:"Employer created successfully", employer})//Nếu thành công
-    }
-
-    signUpWithGoogle=async(req, res)=>{}
-
-    signUpAsEmployer=async(req, res)=>{
-        
     }
 
     //Hàm này sửa sau

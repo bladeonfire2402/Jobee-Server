@@ -5,7 +5,7 @@ class CategoryValidator{
         categoryName: Joi.string().required(),//tên danh mục
         categoryDescription: Joi.string().required(),//mô tả danh mục
         slug: Joi.string().required(),//slug danh mục
-        
+        tag: Joi.array().items(Joi.string()) //
     })  
 
 }

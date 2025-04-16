@@ -13,4 +13,5 @@ employerRouter.post('/unbanEmployer/',adminMidleware.isAdmin,EmployerController.
 employerRouter.put('/updateEmployer',EmployerController.updateEmployer)//Cập nhật nhà tuyển dụng
 employerRouter.delete('/deleteEmployer',adminMidleware.isAdmin,EmployerController.deleteEmployer)//Xóa nhà tuyển dụng
 
+
 export default employerRouter

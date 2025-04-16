@@ -1,6 +1,6 @@
-import moongoose from "mongoose";
+import mongoose from "mongoose";
 
-const EmployerSchema = new moongoose.Schema({
+const EmployerSchema = new mongoose.Schema({
   companyName: {  type: String, required: true },//tên Công ty
   companyDescription: { type: String, required: true },//mô tả công ty
   companyAddress: { type: String, required: true },//địa chỉ công ty
@@ -17,4 +17,4 @@ const EmployerSchema = new moongoose.Schema({
   role: { type: String, default:"Employer" },//quyền hạn công ty
 },{timestamps:true})
 
-export default moongoose.model("Employer", EmployerSchema);
+export default mongoose.model("Employer", EmployerSchema);
